@@ -1,5 +1,5 @@
 """
 tests
 =====
-Unit and integration tests for Ciel Architect Bot.
+Unit and integration tests for Discord Server Architect.
 """

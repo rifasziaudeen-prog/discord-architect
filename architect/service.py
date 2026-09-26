@@ -1,7 +1,7 @@
 """
 architect/service.py
 ====================
-Programmatic Discord server automation service for Ciel Architect Bot.
+Programmatic Discord server automation service for Discord Server Architect.
 Executes declarative blueprints, channel and role CRUD, native Discord Community Onboarding,
 verification gates, and server guides. Zero hardcoded IDs.
 """
@@ -16,7 +16,7 @@ from discord.ext import commands
 
 from config import COLOR_CYAN, COLOR_PURPLE, COLOR_DANGER, COLOR_SUCCESS
 
-logger = logging.getLogger("ciel.architect.service")
+logger = logging.getLogger("architect.service")
 
 
 class GuildArchitectService:
@@ -137,7 +137,7 @@ class GuildArchitectService:
                         hoist=hoist,
                         mentionable=mentionable,
                         permissions=perms,
-                        reason="Ciel Blueprint Scaffolding"
+                        reason="Server Architect Blueprint Scaffolding"
                     )
                     created_roles[name] = new_role
                     await asyncio.sleep(0.4)
@@ -163,7 +163,7 @@ class GuildArchitectService:
                     if not cat_obj:
                         cat_obj = await guild.create_category(
                             name=c_name,
-                            reason="Ciel Blueprint Scaffolding"
+                            reason="Server Architect Blueprint Scaffolding"
                         )
                         await asyncio.sleep(0.3)
                     cat_map[c_name] = cat_obj
@@ -187,7 +187,7 @@ class GuildArchitectService:
                             name=ch_name,
                             category=target_cat,
                             overwrites=overwrites,
-                            reason="Ciel Blueprint Scaffolding"
+                            reason="Server Architect Blueprint Scaffolding"
                         )
                     else:
                         await guild.create_text_channel(
@@ -195,7 +195,7 @@ class GuildArchitectService:
                             category=target_cat,
                             topic=topic,
                             overwrites=overwrites,
-                            reason="Ciel Blueprint Scaffolding"
+                            reason="Server Architect Blueprint Scaffolding"
                         )
                     created_count += 1
                     await asyncio.sleep(0.3)
@@ -270,14 +270,14 @@ class GuildArchitectService:
                     ch = await guild.create_voice_channel(
                         name=name,
                         category=target_cat,
-                        reason="Ciel Channel Mutation"
+                        reason="Server Architect Channel Mutation"
                     )
                 else:
                     ch = await guild.create_text_channel(
                         name=name,
                         category=target_cat,
                         topic=topic,
-                        reason="Ciel Channel Mutation"
+                        reason="Server Architect Channel Mutation"
                     )
                 return {"success": True, "action": "created", "channel_id": str(ch.id), "channel_name": ch.name}
 
@@ -286,7 +286,7 @@ class GuildArchitectService:
                 if not target_ch:
                     return {"success": False, "error": f"Channel '{name}' not found."}
                 old_name = target_ch.name
-                await target_ch.delete(reason="Ciel Channel Mutation")
+                await target_ch.delete(reason="Server Architect Channel Mutation")
                 return {"success": True, "action": "deleted", "channel_name": old_name}
 
             elif act == "edit":
@@ -305,7 +305,7 @@ class GuildArchitectService:
                         kwargs["category"] = target_cat
 
                 if kwargs:
-                    await target_ch.edit(**kwargs, reason="Ciel Channel Mutation")
+                    await target_ch.edit(**kwargs, reason="Server Architect Channel Mutation")
                 return {"success": True, "action": "edited", "channel_name": target_ch.name}
 
             return {"success": False, "error": f"Unknown action '{action}'."}
@@ -338,7 +338,7 @@ class GuildArchitectService:
                     name=name,
                     color=c,
                     hoist=hoist,
-                    reason="Ciel Role Mutation"
+                    reason="Server Architect Role Mutation"
                 )
                 return {"success": True, "action": "created", "role_id": str(role.id), "role_name": role.name}
 
@@ -347,7 +347,7 @@ class GuildArchitectService:
                 if not role:
                     return {"success": False, "error": f"Role '{name}' not found."}
                 r_name = role.name
-                await role.delete(reason="Ciel Role Mutation")
+                await role.delete(reason="Server Architect Role Mutation")
                 return {"success": True, "action": "deleted", "role_name": r_name}
 
             elif act in ("assign", "remove"):
@@ -365,10 +365,10 @@ class GuildArchitectService:
                     return {"success": False, "error": f"Member '{target_user}' could not be resolved."}
 
                 if act == "assign":
-                    await member.add_roles(role, reason="Ciel Role Assignment")
+                    await member.add_roles(role, reason="Server Architect Role Assignment")
                     return {"success": True, "action": "assigned", "role_name": role.name, "user": member.display_name}
                 else:
-                    await member.remove_roles(role, reason="Ciel Role Removal")
+                    await member.remove_roles(role, reason="Server Architect Role Removal")
                     return {"success": True, "action": "removed", "role_name": role.name, "user": member.display_name}
 
             return {"success": False, "error": f"Unknown action '{action}'."}
@@ -513,7 +513,7 @@ class GuildArchitectService:
                             role = await guild.create_role(
                                 name=str(r_name).strip(),
                                 color=self.parse_color("#9AA5B1"),
-                                reason="Ciel Autonomous Onboarding Role Genesis"
+                                reason="Server Architect Onboarding Role Genesis"
                             )
                             created_roles.append(role.name)
                             await asyncio.sleep(0.3)
@@ -569,7 +569,7 @@ class GuildArchitectService:
                 default_channels=default_channels if default_channels else discord.utils.MISSING,
                 enabled=enabled,
                 mode=onboarding_mode,
-                reason="Ciel Autonomous Community Onboarding Deployment"
+                reason="Server Architect Community Onboarding Deployment"
             )
             return {
                 "success": True,
@@ -584,7 +584,7 @@ class GuildArchitectService:
         except discord.Forbidden:
             return {
                 "success": False,
-                "error": "Permission Denied: Ciel requires 'Manage Server' and 'Manage Roles' to configure onboarding."
+                "error": "Permission Denied: Bot requires 'Manage Server' and 'Manage Roles' to configure onboarding."
             }
         except discord.HTTPException as http_err:
             return {
@@ -620,7 +620,7 @@ class GuildArchitectService:
             description=desc,
             color=discord.Color.from_str(COLOR_CYAN)
         )
-        embed.set_footer(text="Ciel Security Matrix • One-Click Verification Gate")
+        embed.set_footer(text="Security Matrix • One-Click Verification Gate")
 
         view = VerificationButtonView(verified_role.id)
         msg = await channel.send(embed=embed, view=view)
@@ -659,7 +659,7 @@ class GuildArchitectService:
                 inline=False
             )
 
-        embed.set_footer(text="Ciel Autonomous Architect • Community Standards")
+        embed.set_footer(text="Server Architect • Community Standards")
         return await channel.send(embed=embed)
 
     # ── 7. MASS CHANNEL WIPE (WITH SAFETY PREVIEW) ────────────────────
@@ -707,7 +707,7 @@ class GuildArchitectService:
         for ch in targets:
             if not isinstance(ch, discord.CategoryChannel):
                 try:
-                    await ch.delete(reason="Ciel Mass Channel Purge")
+                    await ch.delete(reason="Server Architect Channel Purge")
                     deleted_count += 1
                     await asyncio.sleep(0.3)
                 except Exception as e:
@@ -717,7 +717,7 @@ class GuildArchitectService:
         for ch in targets:
             if isinstance(ch, discord.CategoryChannel):
                 try:
-                    await ch.delete(reason="Ciel Mass Category Purge")
+                    await ch.delete(reason="Server Architect Category Purge")
                     deleted_count += 1
                     await asyncio.sleep(0.3)
                 except Exception as e:

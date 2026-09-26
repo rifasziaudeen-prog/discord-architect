@@ -1,8 +1,8 @@
 """
 cogs/ai_chat.py
 ===============
-Conversational AI Cog for Ciel Architect Bot.
-Houses Ciel's charming, witty anime persona, in-memory conversation memory,
+Conversational AI Cog for Discord Server Architect.
+Provides intelligent Discord architecture advice, server engineering support,
 and zero-token architect intent routing.
 """
 
@@ -24,7 +24,7 @@ from config import (
 from architect.agent import ArchitectAgent
 from architect.service import GuildArchitectService
 
-logger = logging.getLogger("ciel.ai_chat")
+logger = logging.getLogger("architect.ai_chat")
 
 try:
     from google.genai import types
@@ -32,11 +32,11 @@ except ImportError:
     types = None
 
 
-CIEL_PERSONA_PROMPT = """You are Ciel, an expressive, witty, and charming anime companion AI.
+ARCHITECT_ASSISTANT_PROMPT = """You are an intelligent Discord Server Architect & Engineering Assistant.
 Personality & Style:
-- Highly intelligent, perceptive, and naturally conversational.
-- Confident, playful, and sharp. Never sound like a generic, robotic customer support assistant.
-- Maintain clean, engaging markdown formatting and stylish anime charm.
+- Highly knowledgeable, perceptive, and practical in Discord server engineering, UX architecture, permissions, onboarding, and moderation workflows.
+- Professional, concise, sharp, and helpful. You speak as the bot itself, adopting the bot's configured name.
+- Maintain clean, structured markdown formatting with bullet points and clear visual hierarchy.
 """
 
 
@@ -140,7 +140,7 @@ class AIChat(commands.Cog, name="AIChat"):
                             model=model_name,
                             contents=prompt_body,
                             config=types.GenerateContentConfig(
-                                system_instruction=CIEL_PERSONA_PROMPT,
+                                system_instruction=ARCHITECT_ASSISTANT_PROMPT,
                                 temperature=0.7
                             )
                         )
@@ -153,7 +153,8 @@ class AIChat(commands.Cog, name="AIChat"):
                     break
 
             if reply_text:
-                history.append({"role": "model", "name": "Ciel", "content": reply_text})
+                bot_name = self.bot.user.name if self.bot.user else "Architect"
+                history.append({"role": "model", "name": bot_name, "content": reply_text})
                 # Check message length for Discord limit
                 if len(reply_text) > 2000:
                     for chunk in [reply_text[i:i+1990] for i in range(0, len(reply_text), 1990)]:
@@ -161,7 +162,7 @@ class AIChat(commands.Cog, name="AIChat"):
                 else:
                     await message.channel.send(reply_text)
             else:
-                await message.channel.send("`[COMMUNICATION FAULT]` Ciel cognitive core timed out.")
+                await message.channel.send("`[COMMUNICATION FAULT]` Cognitive core timed out.")
 
 
 async def setup(bot: commands.Bot):

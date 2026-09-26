@@ -1,5 +1,5 @@
 """
 cogs
 ====
-Cog extensions for Ciel Architect Bot.
+Cog extensions for Discord Server Architect.
 """

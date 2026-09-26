@@ -1,7 +1,7 @@
 """
 architect/views.py
 ==================
-Zero-emoji interactive Discord UI Views for Ciel Architect Bot.
+Interactive Discord UI Views for Server Architect Bot.
 Adheres strictly to high-craft glassmorphic and semantic badge design standards.
 """
 
@@ -9,11 +9,11 @@ import logging
 import discord
 from typing import Optional
 
-logger = logging.getLogger("ciel.architect.views")
+logger = logging.getLogger("architect.views")
 
 
 class VerificationButtonView(discord.ui.View):
-    """Zero-emoji interactive view attached to server verification gate embeds.
+    """Interactive view attached to server verification gate embeds.
     Clicking grants the configured verified role to the interaction user.
     """
 
@@ -21,12 +21,12 @@ class VerificationButtonView(discord.ui.View):
         super().__init__(timeout=None)  # Persistent across restarts
         self.verified_role_id = verified_role_id
         if verified_role_id:
-            self.verify_button.custom_id = f"ciel_arch_verify:{verified_role_id}"
+            self.verify_button.custom_id = f"setup_verify:{verified_role_id}"
 
     @discord.ui.button(
         label="VERIFY ACCESS",
         style=discord.ButtonStyle.primary,
-        custom_id="ciel_arch_verify:0"
+        custom_id="setup_verify:0"
     )
     async def verify_button(self, interaction: discord.Interaction, button: discord.ui.Button):
         await handle_verification_click(interaction, self.verified_role_id)
@@ -41,7 +41,7 @@ async def handle_verification_click(interaction: discord.Interaction, fallback_r
 
     role_id = fallback_role_id
     custom_id = interaction.data.get("custom_id", "")
-    if custom_id.startswith("ciel_arch_verify:"):
+    if custom_id.startswith("setup_verify:"):
         try:
             parsed_id = int(custom_id.split(":", 1)[1])
             if parsed_id > 0:
@@ -67,14 +67,14 @@ async def handle_verification_click(interaction: discord.Interaction, fallback_r
         return
 
     try:
-        await member.add_roles(role, reason="Ciel Autonomous Verification Gate Clearance")
+        await member.add_roles(role, reason="Autonomous Verification Gate Clearance")
         await interaction.response.send_message(
             f"`[ACCESS GRANTED]` Welcome to **{guild.name}**. Verified clearance granted: **{role.name}**.",
             ephemeral=True
         )
     except discord.Forbidden:
         await interaction.response.send_message(
-            "`[PERMISSION DENIED]` Bot lacks permission to assign the verification role. Ensure Ciel's role is positioned higher in Server Settings > Roles.",
+            "`[PERMISSION DENIED]` Bot lacks permission to assign the verification role. Ensure the bot's role is positioned higher in Server Settings > Roles.",
             ephemeral=True
         )
     except Exception as e:
@@ -101,7 +101,7 @@ class ArchitectConfirmationView(discord.ui.View):
             return False
         return True
 
-    @discord.ui.button(label="CONFIRM EXECUTION", style=discord.ButtonStyle.danger, custom_id="ciel_arch_btn_confirm")
+    @discord.ui.button(label="CONFIRM EXECUTION", style=discord.ButtonStyle.danger, custom_id="setup_btn_confirm")
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = True
         self.stop()
@@ -109,7 +109,7 @@ class ArchitectConfirmationView(discord.ui.View):
             item.disabled = True
         await interaction.response.edit_message(view=self)
 
-    @discord.ui.button(label="ABORT OPERATION", style=discord.ButtonStyle.secondary, custom_id="ciel_arch_btn_cancel")
+    @discord.ui.button(label="ABORT OPERATION", style=discord.ButtonStyle.secondary, custom_id="setup_btn_cancel")
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = False
         self.stop()

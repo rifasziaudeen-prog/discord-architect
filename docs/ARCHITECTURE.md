@@ -1,6 +1,6 @@
-# Architecture & Technical Design · Project Ciel
+# Architecture & Technical Design · Discord Server Architect
 
-> Comprehensive technical architecture specification for the standalone Ciel Autonomous Server Architect & Cognitive Companion Bot.
+> Comprehensive technical architecture specification for the standalone Discord Server Architect Bot.
 
 ---
 
@@ -18,7 +18,7 @@ flowchart TD
     end
 
     subgraph Core Engine [main.py]
-        BOT[CielArchitectBot]
+        BOT[ServerArchitectBot]
         EV[Event / Interaction Handlers]
     end
 
@@ -29,7 +29,7 @@ flowchart TD
 
     subgraph Cognitive & Routing [cogs/ai_chat.py]
         ROUTER{Zero-Token Intent Router}
-        PERSONA[Ciel Persona LLM]
+        PERSONA[Engineering Assistant LLM]
     end
 
     subgraph Autonomous Architect [architect/]
@@ -61,7 +61,7 @@ flowchart TD
 
 ## 2. Zero-Token Intent Routing Pipeline
 
-Conventional tool-augmented LLM bots attach tool declarations to every prompt. For an architect bot, sending schemas for channel CRUD, role hierarchies, and declarative blueprints consumes ~1,500 prompt tokens on *every* casual greeting ("hi Ciel", "how are you?").
+Conventional tool-augmented LLM bots attach tool declarations to every prompt. For an architect bot, sending schemas for channel CRUD, role hierarchies, and declarative blueprints consumes ~1,500 prompt tokens on *every* casual greeting ("hi bot", "how are you?").
 
 ### Routing Logic
 ```python
@@ -69,7 +69,7 @@ Conventional tool-augmented LLM bots attach tool declarations to every prompt. F
 if _ARCHITECT_INTENT_RE.search(cleaned_text):
     await self.architect_agent.handle_architect_prompt(message, cleaned_text)
 else:
-    # Casual conversation using compact persona prompt (~180 tokens)
+    # Casual conversation using compact assistant prompt (~180 tokens)
     await self.generate_conversational_reply(message, cleaned_text)
 ```
 
@@ -133,7 +133,7 @@ When Gemini invokes `apply_declarative_blueprint`:
 
 3. **Stage 3 · Verification Gate Deployment**:
    - Deploys glassmorphic embed to target channel.
-   - Attaches `VerificationButtonView` with encoded role ID `ciel_arch_verify:<role_id>`.
+   - Attaches `VerificationButtonView` with encoded role ID `setup_verify:<role_id>`.
 
 4. **Stage 4 · Server Guide & Rules**:
    - Publishes formatted rule cards and guidelines with minimal glyphs (`✦`).
@@ -142,7 +142,7 @@ When Gemini invokes `apply_declarative_blueprint`:
 
 ## 5. Native Discord Community Onboarding Sub-Engine
 
-Ciel interfaces directly with the native Discord Community Onboarding API via `guild.edit_onboarding`:
+The bot interfaces directly with the native Discord Community Onboarding API via `guild.edit_onboarding`:
 
 ```
                  [ Community Audit ]
@@ -174,7 +174,7 @@ Ciel interfaces directly with the native Discord Community Onboarding API via `g
 | Vulnerability | Mechanism | Defense Implemented |
 | :--- | :--- | :--- |
 | **Discord 3s Timeout** | LLM generation takes 2–5s | Immediate `await interaction.response.defer()` before cognitive calls. |
-| **Reboot Button Loss** | Ephemeral views lost on restart | `custom_id="ciel_arch_verify:<role_id>"` handled globally in `main.py`. |
+| **Reboot Button Loss** | Ephemeral views lost on restart | `custom_id="setup_verify:<role_id>"` handled globally in `main.py`. |
 | **API 429 Rate Limits** | Batch creation of 20+ channels | Automatic exponential backoff with retry on `HTTP 429`. |
 | **Gemini Quota Exhaust** | Key rate limits / daily caps | Multi-key failover array in `.env` (`GEMINI_API_KEYS`). |
 | **Empty Clean Content** | Raw mentions stripped to empty | Guarded with early return `if not cleaned: return`. |

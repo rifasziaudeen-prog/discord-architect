@@ -1,8 +1,8 @@
 """
 cogs/architect_commands.py
 ==========================
-Application Slash Commands for Ciel Architect Bot.
-Provides the streamlined /setup command suite, /status shortcut, and /ciel companion command
+Application Slash Commands for Discord Server Architect.
+Provides the streamlined /setup command suite, /status shortcut, and /ask assistant command
 with dynamic role authority and zero hardcoded IDs.
 """
 
@@ -23,7 +23,7 @@ from config import (
 from architect.agent import ArchitectAgent
 from architect.service import GuildArchitectService
 
-logger = logging.getLogger("ciel.architect_commands")
+logger = logging.getLogger("architect.commands")
 
 
 class SetupCommands(commands.Cog, name="SetupCommands"):
@@ -48,7 +48,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
     @app_commands.describe(
         role="Optional role granted server architect authority (in addition to Administrators)",
         log_channel="Channel where architect operations and blueprints are logged",
-        ai_enabled="Enable or disable Ciel's conversational chat in this server"
+        ai_enabled="Enable or disable conversational AI chat in this server"
     )
     async def setup_config_cmd(
         self,
@@ -64,7 +64,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
 
         if not guild_config_manager.is_authorized(interaction.user, self.bot):
             await interaction.response.send_message(
-                "`[PERMISSION DENIED]` Only Server Administrators or the Guild Owner can configure Ciel Architect.",
+                "`[PERMISSION DENIED]` Only Server Administrators or the Guild Owner can configure Server Architect.",
                 ephemeral=True
             )
             return
@@ -97,7 +97,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
             description="Server architecture settings updated successfully:\n\n" + "\n".join(updates),
             color=discord.Color.from_str(COLOR_SUCCESS)
         )
-        embed.set_footer(text="Project Ciel Autonomous Architect • Dynamic Configuration")
+        embed.set_footer(text="Autonomous Server Architect • Dynamic Configuration")
         await interaction.followup.send(embed=embed)
 
     # 2. /setup status
@@ -211,7 +211,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
                 description=f"Execution failed: {res.get('error')}",
                 color=discord.Color.from_str(COLOR_DANGER)
             )
-        embed.set_footer(text="Project Ciel Autonomous Architect")
+        embed.set_footer(text="Autonomous Server Architect")
         await interaction.followup.send(embed=embed)
 
     # 6. /setup role
@@ -270,7 +270,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
                 description=f"Execution failed: {res.get('error')}",
                 color=discord.Color.from_str(COLOR_DANGER)
             )
-        embed.set_footer(text="Project Ciel Autonomous Architect")
+        embed.set_footer(text="Autonomous Server Architect")
         await interaction.followup.send(embed=embed)
 
     # 7. /setup wipe
@@ -353,22 +353,22 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
             inline=False
         )
 
-        embed.set_footer(text="Project Ciel Autonomous Architect • System Diagnostics")
+        embed.set_footer(text="Autonomous Server Architect • System Diagnostics")
         await interaction.followup.send(embed=embed)
 
-    # ── STANDALONE SHORTCUT: /ciel ─────────────────────────────────────
+    # ── STANDALONE SHORTCUT: /ask ──────────────────────────────────────
     @app_commands.command(
-        name="ciel",
-        description="Talk to Ciel or issue natural server management instructions."
+        name="ask",
+        description="Ask server engineering advice or issue natural language management commands."
     )
-    @app_commands.describe(prompt="What would you like to ask or instruct Ciel to do?")
-    async def ciel_chat_command(self, interaction: discord.Interaction, prompt: str):
+    @app_commands.describe(prompt="What would you like to ask or instruct the bot to do?")
+    async def ask_command(self, interaction: discord.Interaction, prompt: str):
         if not interaction.response.is_done():
             await interaction.response.defer()
 
         handled = await self.agent.handle_architect_prompt(interaction, prompt)
         if not handled:
-            from .ai_chat import CIEL_PERSONA_PROMPT
+            from .ai_chat import ARCHITECT_ASSISTANT_PROMPT
             from config import GEMINI_API_KEYS, DEFAULT_AI_MODEL, get_gemini_client
             from google.genai import types
 
@@ -383,7 +383,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
                         model=DEFAULT_AI_MODEL,
                         contents=f"User ({interaction.user.display_name}) says: {prompt}",
                         config=types.GenerateContentConfig(
-                            system_instruction=CIEL_PERSONA_PROMPT,
+                            system_instruction=ARCHITECT_ASSISTANT_PROMPT,
                             temperature=0.7
                         )
                     )
@@ -391,7 +391,7 @@ class SetupCommands(commands.Cog, name="SetupCommands"):
                     await interaction.followup.send(text)
                     return
                 except Exception as err:
-                    logger.error(f"Failed generating Ciel reply: {err}")
+                    logger.error(f"Failed generating AI reply: {err}")
 
             await interaction.followup.send("`[FAULT]` Failed generating response.")
 

@@ -1,17 +1,17 @@
-# Project Ciel · Autonomous Server Architect & AI Companion
+# Discord Server Architect · Autonomous Setup & Automation Bot
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-00E5FF.svg)](https://www.python.org/)
 [![Discord.py 2.3+](https://img.shields.io/badge/discord.py-2.3+-9D00FF.svg)](https://discordpy.readthedocs.io/)
 [![Google GenAI](https://img.shields.io/badge/google--genai-3.1%20flash%20lite-00FF88.svg)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> Autonomous, declarative Discord server scaffolding, native Community Onboarding deployment, and witty conversational AI powered by Google Gemini.
+> Autonomous, declarative Discord server scaffolding, native Community Onboarding deployment, and intelligent engineering assistance powered by Google Gemini.
 
 ---
 
 ## Overview
 
-**Ciel Architect** is an autonomous server engineering bot designed for public deployment. Unlike conventional bots that require manual clicking through Discord settings or hardcoding server IDs in Python scripts, Ciel interprets natural language instructions or declarative blueprints to scaffold channels, configure role hierarchies, deploy verification gates, and orchestrate native **Discord Community Onboarding** workflows.
+**Discord Server Architect** is an autonomous server engineering bot designed for public deployment. Unlike conventional bots that require manual clicking through Discord settings or hardcoding server IDs in Python scripts, this bot interprets natural language instructions or declarative blueprints to scaffold channels, configure role hierarchies, deploy verification gates, and orchestrate native **Discord Community Onboarding** workflows.
 
 ```
                           [ Administrator Prompt ]
@@ -19,13 +19,13 @@
                                      ▼
                       ┌─────────────────────────────┐
                       │ Zero-Token Intent Router     │
-                      │ (@Ciel ... / Slash Command) │
+                      │ (@Bot ... / Slash Command)  │
                       └──────────────┬──────────────┘
                                      │
                    ┌─────────────────┴─────────────────┐
                    ▼                                   ▼
         [ Architect Sub-Engine ]              [ Conversational AI ]
-         • Google GenAI Tools                  • Ciel Anime Persona
+         • Google GenAI Tools                  • Engineering Assistant
          • Dynamic Authority Check             • In-Memory Context
                    │                                   │
                    ▼                                   ▼
@@ -57,8 +57,8 @@
 - **Auto-Deployment**: Creates multiple-choice or dropdown questions, resolves or auto-creates assignment roles, and links target channels directly through `guild.edit_onboarding`.
 
 ### 4. Zero-Token Intent Interceptor
-- Everyday casual conversations with Ciel incur **0 architect tool tokens**.
-- Server engineering requests (`@Ciel build a gaming server...`, `@Ciel create a channel...`) are intercepted dynamically via regex and routed directly to the specialized function calling pipeline.
+- Everyday casual conversations incur **0 architect tool tokens**.
+- Server engineering requests (`@Bot build a gaming server...`, `@Bot create a channel...`) are intercepted dynamically via regex and routed directly to the specialized function calling pipeline.
 
 ### 5. Two-Phase Safe Confirmation Views
 - Irreversible destructive actions (such as mass channel resets or purges) require explicit interactive confirmation through ephemeral, non-delegable button views.
@@ -83,24 +83,24 @@ The bot provides a streamlined, intuitive `/setup` suite alongside quick shortcu
 | `/setup role <create \| delete \| assign \| remove>` | Architect / Admin | Create, delete, assign, or remove a server role with custom hex colors. |
 | `/setup wipe [keep]` | Architect / Admin | Safely purge channels with interactive two-phase confirmation (preserves rules). |
 | `/status` | Everyone | Instant shortcut for `/setup status`. |
-| `/ciel <prompt>` | Everyone | Converse with Ciel or issue natural server management directives. |
+| `/ask <prompt>` | Everyone | Ask server engineering advice or issue natural language management commands. |
 
 ---
 
 ## Natural Language Examples
 
-You can mention `@Ciel` directly in any channel:
+You can mention the bot directly in any channel:
 
 - **Server Blueprinting**:
-  > `@Ciel build a cyberpunk developer server with announcement, general, dev-lounge, and voice channels.`
+  > `@Bot build a developer community server with announcement, general, dev-lounge, and voice channels.`
 - **Channel Mutation**:
-  > `@Ciel create a channel named #announcements under Information category.`
+  > `@Bot create a channel named #announcements under Information category.`
 - **Role Scaffolding**:
-  > `@Ciel create a role named Senior Engineer with color #00E5FF and hoist it.`
+  > `@Bot create a role named Senior Engineer with color #00E5FF and hoist it.`
 - **Community Onboarding**:
-  > `@Ciel audit our community onboarding and suggest questions for new members.`
+  > `@Bot audit our community onboarding and suggest questions for new members.`
 - **Safe Purge**:
-  > `@Ciel wipe all channels in this server except #welcome and #general.` *(Presents two-phase confirmation button)*
+  > `@Bot wipe all channels in this server except #welcome and #general.` *(Presents two-phase confirmation button)*
 
 ---
 
@@ -114,8 +114,8 @@ You can mention `@Ciel` directly in any channel:
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/your-username/ciel-architect-bot.git
-cd ciel-architect-bot
+git clone https://github.com/rifasziaudeen-prog/discord-architect.git
+cd discord-architect
 pip install -r requirements.txt
 ```
 
@@ -172,7 +172,7 @@ When generating your bot invite URL in the Discord Developer Portal, ensure the 
 ## Project Structure
 
 ```
-ciel-architect-bot/
+discord-architect/
 ├── .env.example              # Environment configuration template
 ├── .gitignore                # Git ignore rules
 ├── LICENSE                   # MIT License
@@ -188,11 +188,11 @@ ciel-architect-bot/
 │   ├── agent.py              # Gemini function calling coordinator & embed renderer
 │   ├── schemas.py            # Compact Gemini tool function declarations
 │   ├── service.py            # Discord REST API automation & onboarding engine
-│   └── views.py              # Zero-emoji verification & confirmation views
+│   └── views.py              # Interactive verification & confirmation views
 ├── cogs/
 │   ├── __init__.py
-│   ├── ai_chat.py            # Conversational persona, memory & zero-token router
-│   └── architect_commands.py # Streamlined /setup suite, /status, and /ciel commands
+│   ├── ai_chat.py            # Conversational assistant & zero-token router
+│   └── architect_commands.py # Streamlined /setup suite, /status, and /ask commands
 └── tests/
     ├── conftest.py
     ├── test_permissions_and_config.py

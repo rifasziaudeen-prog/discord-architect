@@ -1,7 +1,7 @@
 """
 tests/conftest.py
 =================
-Pytest configuration and shared fixtures for Ciel Architect Bot test suite.
+Pytest configuration and shared fixtures for Discord Server Architect test suite.
 """
 
 import sys

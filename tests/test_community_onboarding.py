@@ -1,7 +1,7 @@
 """
 tests/test_community_onboarding.py
 ==================================
-Unit tests for Community Onboarding audit and configuration in Ciel Architect Bot.
+Unit tests for Community Onboarding audit and configuration in Discord Server Architect.
 """
 
 import unittest

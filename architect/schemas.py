@@ -1,14 +1,14 @@
 """
 architect/schemas.py
 ====================
-Compact Google GenAI function declarations for Ciel Architect Sub-Engine.
+Compact Google GenAI function declarations for Discord Server Architect.
 Provides token-efficient schemas for autonomous Discord server management.
 """
 
 from typing import List, Any
 import logging
 
-logger = logging.getLogger("ciel.architect.schemas")
+logger = logging.getLogger("architect.schemas")
 
 try:
     from google.genai import types

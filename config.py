@@ -2,7 +2,7 @@
 config.py
 =========
 Global configuration, environment variable loaders, and dynamic guild settings management
-for Ciel Architect Bot. Zero hardcoded Discord IDs.
+for Discord Server Architect Bot. Zero hardcoded Discord IDs.
 """
 
 import os
@@ -18,7 +18,7 @@ from discord.ext import commands
 # Load .env file
 load_dotenv()
 
-logger = logging.getLogger("ciel.config")
+logger = logging.getLogger("architect.config")
 
 # ── Core Environment Variables ────────────────────────────────────────
 DISCORD_TOKEN: str = os.getenv("DISCORD_TOKEN", "").strip()

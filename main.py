@@ -1,7 +1,7 @@
 """
 main.py
 =======
-Main entry point for Ciel Architect Bot.
+Main entry point for Discord Server Architect Bot.
 Initializes Discord client, synchronizes slash commands, and loads modular cogs.
 """
 
@@ -33,11 +33,11 @@ logging.basicConfig(
     format=log_format,
     datefmt="%Y-%m-%d %H:%M:%S"
 )
-logger = logging.getLogger("ciel.main")
+logger = logging.getLogger("architect.main")
 
 
-class CielArchitectBot(commands.Bot):
-    """Autonomous server architect & cognitive companion Discord bot."""
+class ServerArchitectBot(commands.Bot):
+    """Autonomous server architect & setup Discord bot."""
 
     def __init__(self):
         intents = discord.Intents.default()
@@ -84,7 +84,7 @@ class CielArchitectBot(commands.Bot):
         """Global handler for persistent button views across bot restarts."""
         if interaction.type == discord.InteractionType.component:
             custom_id = interaction.data.get("custom_id", "")
-            if custom_id.startswith("ciel_arch_verify:"):
+            if custom_id.startswith("setup_verify:"):
                 from architect.views import handle_verification_click
                 await handle_verification_click(interaction)
                 return
@@ -100,11 +100,11 @@ class CielArchitectBot(commands.Bot):
 
         banner = f"""
 ================================================================
-  PROJECT CIEL · AUTONOMOUS SERVER ARCHITECT
+  DISCORD SERVER ARCHITECT · AUTONOMOUS SETUP BOT
 ================================================================
   Status      : ONLINE
   Bot Identity: {bot_user.name}#{bot_user.discriminator} (ID: {bot_user.id})
-  Application : {self.application.name if self.application else 'Ciel'}
+  Application : {self.application.name if self.application else 'Architect'}
   Owner       : {owner_name}
   Guilds      : {len(self.guilds)} connected
   Latency     : {round(self.latency * 1000, 2)} ms
@@ -116,7 +116,7 @@ class CielArchitectBot(commands.Bot):
 
         activity = discord.Activity(
             type=discord.ActivityType.watching,
-            name="server architecture | @Ciel"
+            name="server architecture | /setup"
         )
         await self.change_presence(status=discord.Status.online, activity=activity)
 
@@ -126,7 +126,7 @@ def main():
         logger.critical("[BOOT FAULT] DISCORD_TOKEN is missing. Provide it in .env or environment variables.")
         sys.exit(1)
 
-    bot = CielArchitectBot()
+    bot = ServerArchitectBot()
 
     try:
         bot.run(DISCORD_TOKEN, log_handler=None)

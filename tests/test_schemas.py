@@ -1,7 +1,7 @@
 """
 tests/test_schemas.py
 =====================
-Tests Gemini function declaration schemas for Ciel Architect Bot.
+Tests Gemini function declaration schemas for Discord Server Architect.
 """
 
 import unittest

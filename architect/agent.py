@@ -1,9 +1,9 @@
 """
 architect/agent.py
 ==================
-Conversational Architect Coordinator for Ciel Architect Bot.
+Conversational Architect Coordinator for Discord Server Architect.
 Invokes Google Gemini with compact tool declarations to design and configure Discord servers.
-Enforces dynamic role authority, zero-emoji UI standards, and two-phase confirmation views.
+Enforces dynamic role authority, glassmorphic UI standards, and two-phase confirmation views.
 """
 
 import logging
@@ -25,7 +25,7 @@ from .service import GuildArchitectService
 from .schemas import get_architect_gemini_tools
 from .views import ArchitectConfirmationView
 
-logger = logging.getLogger("ciel.architect.agent")
+logger = logging.getLogger("architect.agent")
 
 try:
     from google.genai import types
@@ -33,7 +33,7 @@ except ImportError:
     types = None
 
 
-ARCHITECT_SYSTEM_PROMPT = """You are Ciel's Autonomous Server Architect Sub-Engine.
+ARCHITECT_SYSTEM_PROMPT = """You are an Autonomous Discord Server Architect and Setup Engine.
 Your mission is to analyze natural language requests from the server administrator and execute precise, high-craft Discord server management operations.
 
 DIRECTIVES:
@@ -44,8 +44,8 @@ DIRECTIVES:
    - For single channel creation, deletion, or renaming: call `manage_channel`.
    - For role creation, deletion, assignment, or permissions: call `manage_role`.
    - For channel wipes or resets: call `wipe_channels_preview`.
-4. Format channel names in lowercase kebab-case (e.g. 'rules-and-info', 'general-chat', 'voice-lounge').
-5. Build cohesive, elegant role hierarchies with hex colors (e.g. '#00E5FF', '#9D00FF', '#FF0055').
+2. Format channel names in lowercase kebab-case (e.g. 'rules-and-info', 'general-chat', 'voice-lounge').
+3. Build cohesive, elegant role hierarchies with hex colors (e.g. '#00E5FF', '#9D00FF', '#FF0055').
 """
 
 
@@ -120,7 +120,7 @@ class ArchitectAgent:
                 description="Server architecture and layout commands are restricted to Server Administrators, the Server Owner, or the configured Architect Role.",
                 color=discord.Color.from_str(COLOR_DANGER)
             )
-            embed.set_footer(text="Ciel Security Matrix • Access Denied")
+            embed.set_footer(text="Security Matrix • Access Denied")
             await reply(embed=embed)
             return True
 
@@ -202,7 +202,7 @@ class ArchitectAgent:
                                 value="\n".join([f"• {e}" for e in result["errors"][:10]]),
                                 inline=False
                             )
-                        embed.set_footer(text="Project Ciel Autonomous Architect • Blueprint Pipeline")
+                        embed.set_footer(text="Autonomous Server Architect • Blueprint Pipeline")
                         await reply(embed=embed)
                         await self.log_to_guild(guild, embed)
                         return True
@@ -222,7 +222,7 @@ class ArchitectAgent:
                                 description=f"Execution failed: {result.get('error')}",
                                 color=discord.Color.from_str(COLOR_DANGER)
                             )
-                        embed.set_footer(text="Project Ciel Autonomous Architect")
+                        embed.set_footer(text="Autonomous Server Architect")
                         await reply(embed=embed)
                         await self.log_to_guild(guild, embed)
                         return True
@@ -242,7 +242,7 @@ class ArchitectAgent:
                                 description=f"Execution failed: {result.get('error')}",
                                 color=discord.Color.from_str(COLOR_DANGER)
                             )
-                        embed.set_footer(text="Project Ciel Autonomous Architect")
+                        embed.set_footer(text="Autonomous Server Architect")
                         await reply(embed=embed)
                         await self.log_to_guild(guild, embed)
                         return True
@@ -315,12 +315,12 @@ class ArchitectAgent:
 
                         if report.get("suggestions"):
                             embed.add_field(
-                                name="Ciel Architectural Recommendations",
+                                name="Architectural Recommendations",
                                 value="\n".join([f"✦ {s}" for s in report["suggestions"]]),
                                 inline=False
                             )
 
-                        embed.set_footer(text="Project Ciel Autonomous Architect • Community Onboarding Engine")
+                        embed.set_footer(text="Autonomous Server Architect • Community Onboarding Engine")
                         await reply(embed=embed)
                         return True
 
@@ -350,7 +350,7 @@ class ArchitectAgent:
                             if res.get("details"):
                                 embed.add_field(name="Details", value="\n".join([f"• {d}" for d in res["details"][:5]]), inline=False)
 
-                        embed.set_footer(text="Project Ciel Autonomous Architect • Native Discord API")
+                        embed.set_footer(text="Autonomous Server Architect • Native Discord API")
                         await reply(embed=embed)
                         await self.log_to_guild(guild, embed)
                         return True
@@ -363,7 +363,7 @@ class ArchitectAgent:
                     description=reply_text,
                     color=discord.Color.from_str(COLOR_CYAN)
                 )
-                embed.set_footer(text="Project Ciel Autonomous Architect")
+                embed.set_footer(text="Autonomous Server Architect")
                 await reply(embed=embed)
                 return True
 

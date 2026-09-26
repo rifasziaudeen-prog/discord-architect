@@ -27,9 +27,9 @@ class TestSetupCommands(unittest.TestCase):
             self.assertIn(exp, subcommand_names)
 
     def test_standalone_shortcuts_registered(self):
-        """Verifies standalone /status and /ciel commands are registered."""
+        """Verifies standalone /status and /ask commands are registered."""
         self.assertTrue(hasattr(self.cog, "quick_status_cmd"))
-        self.assertTrue(hasattr(self.cog, "ciel_chat_command"))
+        self.assertTrue(hasattr(self.cog, "ask_command"))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 """
 tests/test_architect_service.py
 ===============================
-Unit tests for GuildArchitectService methods in Ciel Architect Bot.
+Unit tests for GuildArchitectService methods in Discord Server Architect.
 """
 
 import unittest

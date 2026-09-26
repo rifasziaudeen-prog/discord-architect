@@ -1,12 +1,12 @@
 @echo off
-title CIEL · Autonomous Server Architect
+title DISCORD SERVER ARCHITECT
 color 0b
 cls
 echo ================================================================
-echo           PROJECT CIEL · AUTONOMOUS SERVER ARCHITECT
+echo               DISCORD SERVER ARCHITECT BOT
 echo ================================================================
 echo.
-echo Starting Ciel Architect Bot...
+echo Starting Discord Server Architect Bot...
 echo.
 cd /d "%~dp0"
 python main.py

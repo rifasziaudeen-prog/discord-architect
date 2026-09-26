@@ -1,6 +1,6 @@
-# Setup & Deployment Guide · Project Ciel
+# Setup & Deployment Guide · Discord Server Architect
 
-> Step-by-step setup guide for configuring, deploying, and self-hosting Ciel Architect Bot.
+> Step-by-step setup guide for configuring, deploying, and self-hosting Discord Server Architect Bot.
 
 ---
 
@@ -9,7 +9,7 @@
 ### Step 1.1: Create Application
 1. Navigate to the [Discord Developer Portal](https://discord.com/developers/applications).
 2. Click **New Application** in the top-right corner.
-3. Enter a name (e.g., `Ciel` or `Ciel Architect`) and confirm.
+3. Enter a name (e.g., `Server Architect` or `Setup Bot`) and confirm.
 
 ### Step 1.2: Configure Bot User
 1. Select the **Bot** tab on the left sidebar.
@@ -34,7 +34,7 @@
    - `Attach Files`
    - `Read Message History`
    - `Use Application Commands`
-4. Copy the generated URL and open it in your browser to invite Ciel to your server.
+4. Copy the generated URL and open it in your browser to invite the bot to your server.
 
 ---
 
@@ -51,8 +51,8 @@
 
 ### Step 3.1: Clone and Dependencies
 ```bash
-git clone https://github.com/your-username/ciel-architect-bot.git
-cd ciel-architect-bot
+git clone https://github.com/rifasziaudeen-prog/discord-architect.git
+cd discord-architect
 pip install -r requirements.txt
 ```
 
@@ -83,7 +83,7 @@ LOG_LEVEL=INFO
 
 ---
 
-## 4. Launching Ciel
+## 4. Launching the Bot
 
 ### On Windows
 Double-click `start.bat` or run:
@@ -99,15 +99,15 @@ python3 main.py
 Upon successful startup, the console displays:
 ```
 ================================================================
-  PROJECT CIEL · AUTONOMOUS SERVER ARCHITECT
+  DISCORD SERVER ARCHITECT
 ================================================================
   Status      : ONLINE
-  Bot Identity: Ciel#0000 (ID: ...)
-  Application : Ciel
-  Owner       : YourAccount (ID: ...)
+  Bot Identity: ServerArchitect#0000 (ID: ...)
+  Application : Server Architect
+  Owner       : rifasziaudeen-prog (ID: ...)
   Guilds      : 1 connected
   Latency     : 42.15 ms
-  Design      : Glassmorphic Cyberpunk
+  Design      : Glassmorphic Minimalist
 ================================================================
 ```
 
@@ -128,7 +128,7 @@ Check that **Bot Authority Diagnostics** reports `GRANTED` for all three core pe
 - `Manage Server`
 
 > [!IMPORTANT]
-> **Role Hierarchy Position**: In Discord **Server Settings > Roles**, drag Ciel's bot role to the top of the role list (just below Owner/Admin). Discord prevents bots from creating, modifying, or assigning roles that are positioned above their own highest role.
+> **Role Hierarchy Position**: In Discord **Server Settings > Roles**, drag the bot's highest role to the top of the role list (just below Owner/Admin). Discord prevents bots from creating, modifying, or assigning roles that are positioned above their own highest role.
 
 ### Step 5.2: Configure Server Settings
 Optionally assign an architect role and an audit log channel:
@@ -141,9 +141,9 @@ Try building a sample server category or full blueprint:
 ```
 /setup blueprint prompt:minimalist developer hub with announcements, dev-chat, and voice-lounge
 ```
-Or mention Ciel in chat:
+Or mention the bot in chat:
 ```
-@Ciel build a cyberpunk gaming community with welcome, rules, and voice lounges
+@ServerArchitect build a developer community with welcome, rules, and voice lounges
 ```
 
 ---
@@ -153,7 +153,7 @@ Or mention Ciel in chat:
 | Issue | Cause | Solution |
 | :--- | :--- | :--- |
 | **`Permission Denied: Missing Manage Server`** | Bot was invited without `Manage Server`. | Re-invite the bot with `Manage Server` or grant it in server settings. |
-| **`Cannot modify role`** | Ciel's role is lower than the target role. | Move Ciel's role higher in Server Settings > Roles. |
+| **`Cannot modify role`** | The bot's role is lower than the target role. | Move the bot's role higher in Server Settings > Roles. |
 | **`Community feature is DISABLED`** | Server is a standard Discord server. | Go to Server Settings > Enable Community to use native Onboarding. |
 | **`Interaction Timed Out`** | LLM latency exceeded timeout before ACK. | Built-in deferral prevents this; check network connection to Google API. |
-| **`Prompt must have at least 2 options`** | Discord API Onboarding constraint. | Ciel enforces this automatically; ensure questions have multiple choices. |
+| **`Prompt must have at least 2 options`** | Discord API Onboarding constraint. | The bot enforces this automatically; ensure questions have multiple choices. |

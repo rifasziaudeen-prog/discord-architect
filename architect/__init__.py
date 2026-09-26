@@ -1,7 +1,7 @@
 """
 architect
 =========
-Autonomous Discord Server Architect Engine for Ciel.
+Autonomous Discord Server Architect Engine.
 Provides programmatic declarative blueprints, channel and role management,
 native Discord Community Onboarding deployment, and verification systems.
 """
