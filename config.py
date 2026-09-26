@@ -32,7 +32,7 @@ _raw_owner = os.getenv("BOT_OWNER_ID", "").strip()
 BOT_OWNER_ID: Optional[int] = int(_raw_owner) if _raw_owner.isdigit() else None
 
 COMMAND_PREFIX: str = os.getenv("COMMAND_PREFIX", "!").strip()
-DEFAULT_AI_MODEL: str = os.getenv("DEFAULT_AI_MODEL", "gemini-2.5-flash").strip()
+DEFAULT_AI_MODEL: str = os.getenv("DEFAULT_AI_MODEL", "gemini-3.1-flash-lite").strip()
 LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO").strip().upper()
 
 # UI Theme Palette (Cyberpunk / Glassmorphic)

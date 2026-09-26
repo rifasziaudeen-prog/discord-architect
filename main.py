@@ -108,7 +108,7 @@ class CielArchitectBot(commands.Bot):
   Owner       : {owner_name}
   Guilds      : {len(self.guilds)} connected
   Latency     : {round(self.latency * 1000, 2)} ms
-  Design      : Glassmorphic Cyberpunk (Zero-Emoji Compliant)
+  Design      : Glassmorphic Cyberpunk
 ================================================================
 """
         print(banner)

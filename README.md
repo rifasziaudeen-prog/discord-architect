@@ -2,9 +2,8 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-00E5FF.svg)](https://www.python.org/)
 [![Discord.py 2.3+](https://img.shields.io/badge/discord.py-2.3+-9D00FF.svg)](https://discordpy.readthedocs.io/)
-[![Google GenAI](https://img.shields.io/badge/google--genai-2.5%20flash-00FF88.svg)](https://ai.google.dev/)
+[![Google GenAI](https://img.shields.io/badge/google--genai-3.1%20flash%20lite-00FF88.svg)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Zero Generic Emojis](https://img.shields.io/badge/UI%20Standard-Zero%20Generic%20Emojis-FF0055.svg)](#design-system)
 
 > Autonomous, declarative Discord server scaffolding, native Community Onboarding deployment, and witty conversational AI powered by Google Gemini.
 
@@ -46,7 +45,7 @@
   - Global Bot Owner (configured in `.env` or auto-detected from Discord application info).
   - Server Owner (`guild.owner_id`).
   - Discord Administrators (`Administrator` permission).
-  - Configurable Architect Role (assigned dynamically via `/architect-setup role:@Role`).
+  - Configurable Architect Role (assigned dynamically via `/setup config role:@Role`).
 
 ### 2. Autonomous Declarative Blueprints
 - Compile and execute full multi-category, multi-channel server blueprints in seconds.
@@ -64,9 +63,9 @@
 ### 5. Two-Phase Safe Confirmation Views
 - Irreversible destructive actions (such as mass channel resets or purges) require explicit interactive confirmation through ephemeral, non-delegable button views.
 
-### 6. High-Craft Visual Standards
-- Adheres strictly to **Zero Generic Emojis**: Replaces emojis with minimalist semantic badges (`[ARCHITECT]`, `[VERIFIED]`, `[SYSTEM]`, `[DEPLOYED]`) and geometric indicators.
+### 6. High-Craft Visual Presentation
 - High-contrast glassmorphic palette: Cyber Cyan (`#00E5FF`), Royal Purple (`#9D00FF`), Crimson Warning (`#FF0055`).
+- Clean typography and semantic text badges (`[ARCHITECT]`, `[VERIFIED]`, `[SYSTEM]`, `[DEPLOYED]`).
 
 ---
 
@@ -140,7 +139,7 @@ BOT_OWNER_ID=
 
 # Bot Settings
 COMMAND_PREFIX=!
-DEFAULT_AI_MODEL=gemini-2.5-flash
+DEFAULT_AI_MODEL=gemini-3.1-flash-lite
 LOG_LEVEL=INFO
 ```
 

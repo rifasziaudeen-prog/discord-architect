@@ -44,9 +44,8 @@ DIRECTIVES:
    - For single channel creation, deletion, or renaming: call `manage_channel`.
    - For role creation, deletion, assignment, or permissions: call `manage_role`.
    - For channel wipes or resets: call `wipe_channels_preview`.
-2. Format channel names in lowercase kebab-case (e.g. 'rules-and-info', 'general-chat', 'voice-lounge').
-3. Build cohesive, elegant role hierarchies with hex colors (e.g. '#00E5FF', '#9D00FF', '#FF0055').
-5. Absolute Prohibition: Do NOT use generic unicode emojis. Use semantic text badges (e.g., '[ARCHITECT]', '[DEPLOYED]', '[SYSTEM]') or minimalist glyphs ('✦', '•').
+4. Format channel names in lowercase kebab-case (e.g. 'rules-and-info', 'general-chat', 'voice-lounge').
+5. Build cohesive, elegant role hierarchies with hex colors (e.g. '#00E5FF', '#9D00FF', '#FF0055').
 """
 
 
@@ -143,7 +142,7 @@ class ArchitectAgent:
             guild_snapshot = self.build_server_snapshot(guild)
             user_content = f"{guild_snapshot}\n\n[ADMINISTRATOR INSTRUCTION]:\n{clean_prompt}"
 
-            models_to_try = [DEFAULT_AI_MODEL, "gemini-2.5-flash", "gemini-3.5-flash-lite", "gemini-flash-lite-latest"]
+            models_to_try = [DEFAULT_AI_MODEL, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash"]
             # Deduplicate models list while preserving order
             seen_models = set()
             models_to_try = [m for m in models_to_try if not (m in seen_models or seen_models.add(m))]

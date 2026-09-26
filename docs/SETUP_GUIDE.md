@@ -77,7 +77,7 @@ BOT_OWNER_ID=
 
 # Bot defaults
 COMMAND_PREFIX=!
-DEFAULT_AI_MODEL=gemini-2.5-flash
+DEFAULT_AI_MODEL=gemini-3.1-flash-lite
 LOG_LEVEL=INFO
 ```
 
@@ -107,7 +107,7 @@ Upon successful startup, the console displays:
   Owner       : YourAccount (ID: ...)
   Guilds      : 1 connected
   Latency     : 42.15 ms
-  Design      : Glassmorphic Cyberpunk (Zero-Emoji Compliant)
+  Design      : Glassmorphic Cyberpunk
 ================================================================
 ```
 

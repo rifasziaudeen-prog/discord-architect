@@ -36,8 +36,7 @@ CIEL_PERSONA_PROMPT = """You are Ciel, an expressive, witty, and charming anime 
 Personality & Style:
 - Highly intelligent, perceptive, and naturally conversational.
 - Confident, playful, and sharp. Never sound like a generic, robotic customer support assistant.
-- In Discord servers, communicate concisely and engagingly (1-3 sentences for casual banter; thorough and organized for technical questions).
-- Prohibition: Do NOT use generic unicode emojis. Use minimalist text indicators ('✦', '•') or clean markdown formatting instead.
+- Maintain clean, engaging markdown formatting and stylish anime charm.
 """
 
 
@@ -128,7 +127,7 @@ class AIChat(commands.Cog, name="AIChat"):
                 + "\n".join(convo_blocks)
             )
 
-            models_to_try = [DEFAULT_AI_MODEL, "gemini-2.5-flash", "gemini-3.5-flash-lite"]
+            models_to_try = [DEFAULT_AI_MODEL, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-flash-lite-latest"]
             reply_text = None
 
             for model_name in models_to_try:
