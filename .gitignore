@@ -1,0 +1,25 @@
+# Environment variables & secrets
+.env
+*.env
+!.env.example
+
+# Local data & guild configs (persisted locally, never committed)
+data/*.json
+!data/.gitkeep
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
